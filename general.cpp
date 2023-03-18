@@ -58,7 +58,11 @@ namespace uo {
     //=========================================================================================
     auto locDefaultForUOData() -> const std::filesystem::path& {
         if (uo_location.empty()){
-            auto value = std::string(std::getenv("UODIR")) ;
+            auto temp  = std::getenv("UODIR") ;
+            auto value = std::string();
+            if (temp != nullptr){
+                value = temp  ;
+            }
             if (!value.empty()){
                 auto temp = std::filesystem::path(value);
                 if (std::filesystem::exists(temp)){
